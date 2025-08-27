@@ -1,0 +1,149 @@
+{
+	"home": {
+		"title": "react-strings",
+		"subtitle": "Mantén tu contenido organizado, fácil de actualizar y multilingüe, creado para React.",
+		"developer": "Desarrollado por ",
+		"sum": {
+			"title": "Resumen",
+			"data": "Esta guía muestra la implementación de react-strings en un sitio web estático desarrollado con nextjs y typescript usando locales. Este sitio fue desarrollado con las tecnologías mencionadas en esta guía, puedes encontrar el código fuente en el siguiente ",
+			"repository": "repositorio"
+		},
+		"links": {
+			"dev": "https://intorandom.com",
+			"repo": "https://github.com/intoRandom/react-strings-next",
+			"coffee": "https://buymeacoffee.com/intorandom"
+		},
+		"npm": "npm install react-strings",
+		"inst": {
+			"title": "Instalación",
+			"data": "react-strings puede instalarse fácilmente con:"
+		},
+		"config": {
+			"title": "Configuración",
+			"data": "react-strings solo necesita los siguientes archivos:",
+			"files": [
+				{
+					"data": "Idiomas, estos archivos contienen la información correspondiente a cada idioma",
+					"file": [
+						"@/data/messages/en.json ",
+						"",
+						"{ ",
+						"  \"title\": \"Bienvenido a react-strings\",",
+						"  \"version\": \"Versión actual: {{version}}\", // incluir múltiples {{valores}} ",
+						"  \"features\": [",
+						"    { \"title\": \"Autocompletado\", \"data\": \"Recordar claves\" },",
+						"    { \"title\": \"Idiomas\", \"data\": \"Soporte multilenguaje\" },",
+						"    { \"title\": \"Identificación\", \"data\": \"Navegador y almacenamiento\" }",
+						"  ]",
+						"}"
+					]
+				},
+				{
+					"data": "Configuración, este archivo tendrá la siguiente estructura y se utiliza para inicializar la gestión de strings",
+					"file": [
+						"@/data/stringsConfig.ts ",
+						"",
+						"'use client' ",
+						"",
+						"import { createStrings } from 'react-strings'; ",
+						"",
+						"// Importa tu idioma principal, para autocompletado de claves ",
+						"import en from './messages/en.json; ",
+						"",
+						"const initStrings: LangConfigType = createStrings({ ",
+						"  // strings necesita solo una clave, las demás serán ignoradas",
+						"  // direction: opcional, útil para idiomas rtl",
+						"  strings: { en: { data: en, direction: 'ltr' } },",
+						"  // importa otros idiomas como promesas, úsalos bajo demanda",
+						"  languages: { ",
+						"    es: { loader: () => import('@/data/messages/es.json') },",
+						"    ar: { loader: () => import('@/data/messages/ar.json'), direction:'rtl' }",
+						"  },",
+						"  // browser: opcional, úsalo para obtener idiomas del navegador",
+						"  browser: true, ",
+						"  // storage: opcional, úsalo para preservar las preferencias del usuario",
+						"  storage: true,",
+						"  // bgColor: opcional, color CSS por defecto blanco, usado en transiciones para evitar parpadeos",
+						"  bgColor: 'white',",
+						"  // duration: opcional, por defecto 200, tiempo de transición en milisegundos",
+						"  duration: 200 ",
+						"});",
+						"",
+						"// getLocale: devuelve un locale después de la resolución de almacenamiento y navegador",
+						"export const { StringsProvider, useStrings, getLocale } = initStrings;"
+					]
+				},
+				{
+					"data": "Contenedor, este debe ubicarse en el layout del proyecto de la ruta",
+					"file": [
+						"@/app/layout.tsx ",
+						"",
+						"... ",
+						"import { StringsProvider } from '@/data/stringsConfig'; ",
+						"",
+						"export default function RootLayout({ ",
+						"  children, ",
+						"}: Readonly<{ ",
+						"  children: React.ReactNode; ",
+						"}>) { ",
+						"   return ( ",
+						"    <html lang='en'> ",
+						"      <body > ",
+						"        {/* locale: opcional, usado para bundle de un solo idioma */}",
+						"        <StringsProvider locale:'en' > ",
+						"          {children} ",
+						"        </StringsProvider> ",
+						"      </body> ",
+						"    </html> ",
+						"  ); ",
+						"}"
+					]
+				},
+				{
+					"data": "Eso es todo lo necesario para dar soporte multilenguaje a tu proyecto. Para obtener los strings o arrays de cada idioma solo usa el hook useStrings dentro de un componente",
+					"file": [
+						"\"use client\"; ",
+						"",
+						"import { useStrings } from '@/data/stringsConfig'; ",
+						"",
+						" const UseHooks = () => { ",
+						"  const { Str, Arr, language, setLanguage } = useStrings(); ",
+						"",
+						"  return ( ",
+						"    <section> ",
+						"      {/* esto devuelve el idioma actual */} ",
+						"      <h1>{language}</h1> ",
+						"",
+						"      {/* este botón cambia el idioma actual */} ",
+						"      {/* setLanguage se desactiva si locale está en provider */} ",
+						"      <button onClick={()=>setLanguage(\"es\")}>Cambiar idioma</button> ",
+						"",
+						"      {/* esto devuelve un string */} ",
+						"      <h2>{Str.home.title()}</h2> ",
+						"",
+						"      {/* esto devuelve un string con valor dinámico */} ",
+						"      <p>{Str.home.version({ version: '0.2.0' })}</p> ",
+						"",
+						"      {/* esto devuelve un array */} ",
+						"      <ul> ",
+						"        {Arr.home.features.map((item) => ( ",
+						"          <li key={item.title}> ",
+						"            <h2>{item.title}</h2> ",
+						"            <p>{item.data}</p> ",
+						"          </li> ",
+						"        ))} ",
+						"      </ul> ",
+						"    </section> ",
+						"  ); ",
+						"}; ",
+						"",
+						"export default UseHooks; "
+					]
+				}
+			]
+		},
+		"final": "¡Fue divertido (y a veces muy frustrante 😅) construir este paquete! Si quieres apoyar su desarrollo, una pequeña donación ayuda mucho.",
+		"coffee": "Invítame un café",
+		"end": "Cada chispa hace que el proyecto brille más"
+	}
+}
