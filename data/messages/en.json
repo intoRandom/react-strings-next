@@ -1,12 +1,13 @@
 {
 	"home": {
 		"title": "react-strings",
-		"subtitle": "Keep your content organized, easy to update, and multilingual—built for React.",
+		"subtitle": "Keep your content organized, easy to update, and multilingual, built for React.",
 		"developer": "Developed by ",
 		"sum": {
 			"title": "Summary",
-			"data": "This guide shows the implementation of react-strings on a static website developed with nextjs and typescript using locales. This website was developed with the technologies mentioned in this guide, you can find the source code in the following ",
-			"repository": "repository"
+			"data": "This guide shows the implementation of react-strings in a static website developed with nextjs and typescript using locales. This site was built with the technologies mentioned in this guide, you can find the source code in the following ",
+			"repository": "repository",
+			"auto": "Remember that autocomplete works for both typescript and javascript, just make sure to use the keys from the main language and keep the structure of the strings and arrays functions"
 		},
 		"links": {
 			"dev": "https://intorandom.com",
@@ -16,30 +17,47 @@
 		"npm": "npm install react-strings",
 		"inst": {
 			"title": "Installation",
-			"data": "react-strings can easily be installed by:"
+			"data": "react-strings can easily be installed with:"
 		},
 		"config": {
 			"title": "Configuration",
-			"data": "react-strings just need the following files:",
+			"data": "react-strings only needs the following files:",
 			"files": [
 				{
-					"data": "Languages, these files contains the information corresponding to each language",
+					"data": "Languages, these files contain the information corresponding to each language",
 					"file": [
-						"@/data/messages/en.json ",
+						"@/data/messages/en.js ",
 						"",
-						"{ ",
+						"// for key autocompletion without TypeScript, the main language must be a js file",
+						"const data = { ",
 						"  \"title\": \"Welcome to react-strings\",",
 						"  \"version\": \"Current version: {{version}}\", // include multiple {{values}} ",
 						"  \"features\": [",
 						"    { \"title\": \"Autocompletion\", \"data\": \"Remember keys\" },",
 						"    { \"title\": \"Languages\", \"data\": \"Multi language support\" },",
-						"    { \"title\": \"Identification\", \"data\": \"Browser & storage\" }",
 						"  ]",
+						"}",
+						"export default data",
+						"",
+						"",
+						"@/data/messages/es.json ",
+						"",
+						"{ ",
+						"// missing strings will be replaced:",
+						"  \"language\": \"path.keys\" // in development",
+						"  \"language\": \"Welcome to react-strings\" // defaults in production",
+						"  \"version\": \"Version actual: {{version}}\",",
+						"// missing arrays will be replaced:",
+						"  \"features\": [] // in development",
+						"  \"features\": [",
+						"    { \"title\": \"Autocompletion\", \"data\": \"Remember keys\" },",
+						"    { \"title\": \"Languages\", \"data\": \"Multi language support\" },",
+						"  ] // defaults in production",
 						"}"
 					]
 				},
 				{
-					"data": "Configuration, this file will have the following structure and is used to inicialice the strings management ",
+					"data": "Configuration, this file will have the following structure and is used to initialize string management",
 					"file": [
 						"@/data/stringsConfig.ts ",
 						"",
@@ -47,34 +65,35 @@
 						"",
 						"import { createStrings } from 'react-strings'; ",
 						"",
-						"// Import your main language, for key autocomplete ",
-						"import en from './messages/en.json; ",
+						"// Import your main language for key autocompletion ",
+						"import en from \"@/data/messages/en.json\"; ",
 						"",
 						"const initStrings: LangConfigType = createStrings({ ",
-						"  // strings need just one key, others will be ignored",
-						"  // direction: optional, useful for rtl languages",
-						"  strings: { en: { data: en, direction: 'ltr' } },",
-						"  // import other languages as promises, use them on demand",
+						"// strings need only one key, others will be ignored",
+						"// direction: optional, useful for rtl languages",
+						"  strings: { en: { data: en, direction: \"ltr\" } },",
+						"// import other languages as promises, use them on demand",
 						"  languages: { ",
-						"    es: { loader: () => import('@/data/messages/es.json') },",
-						"    ar: { loader: () => import('@/data/messages/ar.json'), direction:'rtl' }",
+						"    es: { loader: () => import(\"@/data/messages/es.json\") },",
+						"    ar: { loader: () => import(\"@/data/messages/ar.json\"), direction:\"rtl\" }",
 						"  },",
-						"  // browser: optional, use this for get browser languages",
+						"// browser: optional, use this to get browser languages",
 						"  browser: true, ",
-						"  // storage: optional, use this for preserve user preferences",
+						"// storage: optional, use this to preserve user preferences",
 						"  storage: true,",
-						"  // bgColor: optional, use CSS colors default white, used in transitions to avoid flickering",
-						"  bgColor: 'white',",
-						"  // duration: optional, default 200, transition time in mili seconds",
-						"  duration: 200 ",
+						"// The following values are used in transitions to avoid flickering",
+						"// bgColor: optional, use CSS colors, default white",
+						"  bgColor: \"white\",",
+						"// duration: optional, in milliseconds, default 200",
+						"  duration: 100 ",
 						"});",
 						"",
-						"// getLocale: return a locale after storage and browser resolution",
+						"// getLocale: returns a locale after resolving storage and browser",
 						"export const { StringsProvider, useStrings, getLocale } = initStrings;"
 					]
 				},
 				{
-					"data": "Container, this should be located at the layout of the project of route",
+					"data": "Container, this should be placed in the project or route layout",
 					"file": [
 						"@/app/layout.tsx ",
 						"",
@@ -89,7 +108,7 @@
 						"   return ( ",
 						"    <html lang='en'> ",
 						"      <body > ",
-						"        {/* locale: optional, used for single language bundle */}",
+						"// locale: optional, used for single language bundle ",
 						"        <StringsProvider locale:'en' > ",
 						"          {children} ",
 						"        </StringsProvider> ",
@@ -100,7 +119,7 @@
 					]
 				},
 				{
-					"data": "That is all it takes to give your project support for multiple languages. For get the strings or arrays for each language just use the hook useStrings inside a component",
+					"data": "That is all it takes to add multi-language support to your project. To get strings or arrays for each language, just use the useStrings hook inside a component",
 					"file": [
 						"\"use client\"; ",
 						"",
@@ -111,20 +130,20 @@
 						"",
 						"  return ( ",
 						"    <section> ",
-						"      {/* this return the current language */} ",
+						"// this returns the current language ",
 						"      <h1>{language}</h1> ",
 						"",
-						"      {/* this button change the current language */} ",
-						"      {/* setLanguage is deactivated if locale in provider */} ",
-						"      <button onClick={()=>setLanguage(\"es\")}>Change Language</button> ",
+						"// this button changes the current language ",
+						"// setLanguage is disabled if locale is in provider ",
+						"      <button onClick={()=>setLanguage(\"es\")}>Change language</button> ",
 						"",
-						"      {/* this return a string */} ",
+						"// this returns a string ",
 						"      <h2>{Str.home.title()}</h2> ",
 						"",
-						"      {/* this return a string with a dynamic value*/} ",
+						"// this returns a string with a dynamic value ",
 						"      <p>{Str.home.version({ version: '0.2.0' })}</p> ",
 						"",
-						"      {/* this return an array */} ",
+						"// this returns an array ",
 						"      <ul> ",
 						"        {Arr.home.features.map((item) => ( ",
 						"          <li key={item.title}> ",
@@ -142,7 +161,7 @@
 				}
 			]
 		},
-		"final": "It was fun (and sometimes very frustrating 😅) building this package! If you’d like to support its journey, a small donation goes a long way..",
+		"final": "It was fun (and sometimes very frustrating 😅) to build this package! If you’d like to support its development, even a small donation helps a lot",
 		"coffee": "Buy me a coffee",
 		"end": "Every spark makes the project shine brighter"
 	}
