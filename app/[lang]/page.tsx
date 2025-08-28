@@ -35,7 +35,7 @@ const Home = () => {
 					</div>
 					<div className='flex flex-col gap-2'>
 						{Str.home.sum.auto()}
-						<Image alt='files' src={'/auto.png'} width={300} height={200} />
+						<Image alt='files' src={'./auto.png'} width={300} height={200} />
 					</div>
 				</section>
 
@@ -50,7 +50,7 @@ const Home = () => {
 				<section className='flex flex-col gap-2'>
 					<h3 className='text-lg'>{Str.home.config.title()}</h3>
 					<div>{Str.home.config.data()}</div>
-					<Image alt='files' src={'/files.png'} width={300} height={200} />
+					<Image alt='files' src={'./files.png'} width={300} height={200} />
 					<ul className='flex flex-col gap-5'>
 						{Arr.home.config.files.map((file, index) => (
 							<li key={index} className='flex flex-col gap-2'>
