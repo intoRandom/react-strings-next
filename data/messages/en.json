@@ -1,10 +1,23 @@
 {
 	"home": {
+		"testObj": [
+			{
+				"value1": "hola mundo",
+				"value2": "que {b{tal}}",
+				"value3": { "val3a": "value", "val3b": ["a", "b"] }
+			},
+			{
+				"value1": "holA",
+				"value2": "que {b{taL}}",
+				"value3": { "val3a": "valuE", "val3b": ["{b{B}}"] }
+			}
+		],
+		"test": ["test", "{b{just test}}"],
 		"title": "react-strings",
 		"subtitle": "Keep your content organized, easy to update, and multilingual, built for React.",
 		"developer": "Developed by ",
 		"sum": {
-			"title": "Summary",
+			"title": "{b{Sum}}mary",
 			"data": "This guide shows the implementation of react-strings in a static website developed with nextjs and typescript using locales. This site was built with the technologies mentioned in this guide, you can find the source code in the following ",
 			"repository": "repository",
 			"auto": "Remember that autocomplete works for both typescript and javascript, just make sure to use the keys from the main language and keep the structure of the strings and arrays functions"
@@ -30,7 +43,7 @@
 						"",
 						"// for key autocompletion without TypeScript, the main language must be a js file",
 						"const data = { ",
-						"  \"title\": \"Welcome to react-strings\",",
+						"  \"title\": \"Welcome to {b{react}}-{i{strings}}\",",
 						"  \"version\": \"Current version: {{version}}\", // include multiple {{values}} ",
 						"  \"features\": [",
 						"    { \"title\": \"Autocompletion\", \"data\": \"Remember keys\" },",

@@ -7,7 +7,7 @@ import Navigation from '@/components/navigation';
 
 const nunito = Nunito({ weight: '400', subsets: ['latin'] });
 
-const locales = ['en', 'es'];
+const locales = ['en', 'es'] as const;
 
 export async function generateStaticParams() {
 	return locales.map((lang) => ({ lang }));
@@ -25,7 +25,11 @@ export default async function LocaleLayout({
 }) {
 	const { lang } = await params;
 
-	if (!locales.includes(lang)) {
+	const isValidLang = (l: string): l is (typeof locales)[number] => {
+		return (locales as readonly string[]).includes(l);
+	};
+
+	if (!isValidLang(lang)) {
 		notFound();
 	}
 

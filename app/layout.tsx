@@ -1,8 +1,5 @@
 import type { Metadata } from 'next';
-import { Nunito } from 'next/font/google';
 import './globals.css';
-
-const nunito = Nunito({ weight: '400', subsets: ['latin'] });
 
 export const metadata: Metadata = {
 	title: 'react-strings',
@@ -15,9 +12,5 @@ export default function RootLayout({
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
-	return (
-		<html lang='en'>
-			<body className={`${nunito.className} antialiased`}>{children}</body>
-		</html>
-	);
+	return children;
 }

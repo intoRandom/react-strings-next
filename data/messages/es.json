@@ -1,10 +1,20 @@
 {
 	"home": {
 		"title": "react-strings",
-		"subtitle": "Mantén tu contenido organizado, fácil de actualizar y multilingüe, creado para React.",
+		"test": ["{b{test}}", "solo test"],
+		"testObj": [
+			{
+				"value1": "value1",
+				"value3": { "val3a": "value", "val3b": ["a", "b"] }
+			},
+			{
+				"value1": "{i{value1}}",
+				"value3": { "val3a": "valuE", "val3b": ["{b{C}}", "a", "s"] }
+			}
+		],
 		"developer": "Desarrollado por ",
 		"sum": {
-			"title": "Resumen",
+			"title": "{b{Res}}umen",
 			"data": "Esta guía muestra la implementación de react-strings en un sitio web estático desarrollado con nextjs y typescript usando locales. Este sitio fue desarrollado con las tecnologías mencionadas en esta guía, puedes encontrar el código fuente en el siguiente ",
 			"repository": "repositorio",
 			"auto": "Recuerda que el auto completado sirve tanto para typescript como javascript, solo asegúrate de usar las claves del idioma principal y mantener la estructura de las funciones de strings y arrays"
@@ -30,7 +40,7 @@
 						"",
 						"// para autocompletar claves sin TypeScript, el idioma principal debe ser un archivo js",
 						"const data = { ",
-						"  \"title\": \"Bienvenido a react-strings\",",
+						"  \"title\": \"Bienvenido a {b{react}}-{i{strings}}\",",
 						"  \"version\": \"Versión actual: {{version}}\", // incluir múltiples {{values}} ",
 						"  \"features\": [",
 						"    { \"title\": \"Autocompletado\", \"data\": \"Recordar claves\" },",

@@ -10,15 +10,37 @@ import { useStrings } from '@/data/stringsConfig';
 
 const Home = () => {
 	const { Arr, Str } = useStrings();
+
 	return (
 		<div className='flex justify-center w-full'>
 			<div className='flex flex-col gap-6 w-full max-w-4xl p-5'>
+				{Arr.home.test.map((item, index) => (
+					<p key={index}>
+						<a href={item as string}>{item}</a>
+					</p>
+				))}
+
+				{Arr.home.testObj.map((item, index) => (
+					<div key={index}>
+						<div>value1:{item.value1}</div>
+						<div>value2:{item.value2}</div>
+						<div>
+							<div>value3a:{item.value3.val3a}</div>
+							{item.value3.val3b.map((sub, i) => (
+								<div key={`sub${i}`}>
+									<div>{sub}</div>
+								</div>
+							))}
+						</div>
+					</div>
+				))}
+
 				<div>{Str.home.subtitle()}</div>
 
 				<section className='flex flex-col gap-3'>
 					<h3 className='text-end'>
 						{Str.home.developer()}
-						<Link href={Str.home.links.dev()} className='underline'>
+						<Link href={Str.home.links.dev() as string} className='underline'>
 							intoRandom
 						</Link>
 					</h3>
@@ -29,13 +51,13 @@ const Home = () => {
 					<h3 className='text-lg'>{Str.home.sum.title()}</h3>
 					<div>
 						{Str.home.sum.data()}
-						<Link href={Str.home.links.repo()} className='underline'>
+						<Link href={Str.home.links.repo() as string} className='underline'>
 							{Str.home.sum.repository()}
 						</Link>
 					</div>
 					<div className='flex flex-col gap-2'>
 						{Str.home.sum.auto()}
-						<Image alt='files' src={'./auto.png'} width={300} height={200} />
+						<Image alt='files' src={'/auto.png'} width={300} height={200} />
 					</div>
 				</section>
 
@@ -43,14 +65,14 @@ const Home = () => {
 					<h3 className='text-lg'>{Str.home.inst.title()}</h3>
 					<div>{Str.home.inst.data()}</div>
 					<SyntaxHighlighter language='javascript' style={a11yDark}>
-						{Str.home.npm()}
+						{Str.home.npm() as string}
 					</SyntaxHighlighter>
 				</section>
 
 				<section className='flex flex-col gap-2'>
 					<h3 className='text-lg'>{Str.home.config.title()}</h3>
 					<div>{Str.home.config.data()}</div>
-					<Image alt='files' src={'./files.png'} width={300} height={200} />
+					<Image alt='files' src={'/files.png'} width={300} height={200} />
 					<ul className='flex flex-col gap-5'>
 						{Arr.home.config.files.map((file, index) => (
 							<li key={index} className='flex flex-col gap-2'>
@@ -65,7 +87,7 @@ const Home = () => {
 
 				<section className='flex flex-col gap-2 py-5'>
 					<div>{Str.home.final()}</div>
-					<Link href={Str.home.links.coffee()} className='underline'>
+					<Link href={Str.home.links.coffee() as string} className='underline'>
 						{Str.home.coffee()}
 					</Link>
 					<div>{Str.home.end()}</div>

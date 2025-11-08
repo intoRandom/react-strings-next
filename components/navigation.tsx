@@ -9,12 +9,14 @@ import { Languages } from 'lucide-react';
 import { useStrings } from '@/data/stringsConfig';
 
 const Navigation = () => {
-	const { Str, language } = useStrings();
+	const { Str, language, setLanguage } = useStrings();
 
 	const SetLang = () => {
 		if (language === 'es') {
+			setLanguage('en');
 			redirect('/en');
 		} else {
+			setLanguage('es');
 			redirect('/es');
 		}
 	};

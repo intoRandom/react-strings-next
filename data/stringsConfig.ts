@@ -9,7 +9,7 @@ const initString = createStrings({
 	languages: { es: { loader: () => import('@/data/messages/es.json') } },
 	browser: true,
 	storage: true,
-	bgColor: 'white',
+	bgColor: 'transparent',
 	duration: 200,
 });
 
